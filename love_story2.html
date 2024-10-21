@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Love Story</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #ffe6e6;
+      color: #6b4f4f;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .book {
+      max-width: 800px;
+      margin: 50px auto;
+      background: #fff;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .chapter {
+      padding: 20px;
+      text-align: center;
+    }
+
+    h2 {
+      font-size: 2em;
+      color: #ff6b6b;
+      margin-bottom: 10px;
+      font-family: 'Georgia', serif;
+    }
+
+    img {
+      width: 80%;
+      height: auto;
+      margin-top: 15px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    p {
+      font-size: 1.2em;
+      line-height: 1.6;
+      margin-top: 15px;
+    }
+
+    .chapter:not(:first-child) {
+      display: none;
+    }
+
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      padding: 20px;
+    }
+
+    button {
+      background-color: #ff6b6b;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      font-size: 1em;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #ff4c4c;
+    }
+
+    .nav-buttons button[disabled] {
+      background-color: #f0a6a6;
+      cursor: not-allowed;
+    }
+
+    .heart {
+      position: absolute;
+      font-size: 50px;
+      color: #ff6b6b;
+      animation: float 5s infinite ease-in-out;
+      opacity: 0.7;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); opacity: 1; }
+      50% { transform: translateY(-50px); opacity: 0.5; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+
+    /* Media Query for iPhone 12 and above (smaller screens) */
+    @media screen and (max-width: 480px) {
+      body {
+        background-color: #ffe6e6;
+      }
+
+      .book {
+        width: 95%;
+        margin: 20px auto;
+      }
+
+      h2 {
+        font-size: 1.5em;
+      }
+
+      img {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+      }
+
+      p {
+        font-size: 1em;
+      }
+
+      .nav-buttons {
+        padding: 10px;
+      }
+
+      button {
+        padding: 8px 12px;
+        font-size: 0.9em;
+      }
+
+      .heart {
+        font-size: 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="book">
+    <div class="chapter" id="chapter1">
+      <h2>The Beginning of Us</h2>
+      <img src="your_image_here1.jpg" alt="How We Met">
+      <p>Who knew that a simple hello would lead us here? The day our worlds collided is a day I will never forget.</p>
+    </div>
+
+    <div class="chapter" id="chapter2">
+      <h2>Our First Adventure</h2>
+      <img src="your_image_here2.jpg" alt="First Date">
+      <p>I still remember the butterflies from our first date. A day to remember forever.</p>
+    </div>
+
+    <div class="chapter" id="chapter3">
+      <h2>Our First Journey</h2>
+      <img src="your_image_here3.jpg" alt="First Trip">
+      <p>Exploring new places and creating memories to last a lifetime. With you, every place feels like home.</p>
+    </div>
+
+    <div class="chapter" id="chapter4">
+      <h2>Laughter and Love</h2>
+      <img src="your_image_here4.jpg" alt="Silly Moments">
+      <p>The best part of us is how much we laugh together. You make every moment brighter.</p>
+    </div>
+
+    <div class="chapter" id="chapter5">
+      <h2>Milestones and Memories</h2>
+      <img src="your_image_here5.jpg" alt="Special Days">
+      <p>Every milestone and special day spent with you feels like a celebration of love.</p>
+    </div>
+
+    <div class="chapter" id="chapter6">
+      <h2>The Magic in the Everyday</h2>
+      <img src="your_image_here6.jpg" alt="Little Moments">
+      <p>It's the little things that make me fall for you every single day.</p>
+    </div>
+
+    <div class="chapter" id="chapter7">
+      <h2>Our Next Chapter</h2>
+      <img src="your_image_here7.jpg" alt="The Future">
+      <p>I can't wait to see where life takes us next. Together, we can conquer anything.</p>
+    </div>
+
+    <div class="nav-buttons">
+      <button id="prev" disabled>Previous</button>
+      <button id="next">Next</button>
+    </div>
+  </div>
+
+  <script>
+    const chapters = document.querySelectorAll('.chapter');
+    let currentChapter = 0;
+
+    const prevBtn = document.getElementById('prev');
+    const nextBtn = document.getElementById('next');
+
+    function updateNavigation() {
+      prevBtn.disabled = currentChapter === 0;
+      nextBtn.disabled = currentChapter === chapters.length - 1;
+    }
+
+    function showChapter(index) {
+      chapters.forEach((chapter, i) => {
+        chapter.style.display = i === index ? 'block' : 'none';
+      });
+      updateNavigation();
+    }
+
+    prevBtn.addEventListener('click', () => {
+      if (currentChapter > 0) {
+        currentChapter--;
+        showChapter(currentChapter);
+      }
+    });
+
+    nextBtn.addEventListener('click', () => {
+      if (currentChapter < chapters.length - 1) {
+        currentChapter++;
+        showChapter(currentChapter);
+      }
+    });
+
+    // Add floating hearts (for a cute touch)
+    for (let i = 0; i < 10; i++) {
+      const heart = document.createElement('div');
+      heart.textContent = '❤';
+      heart.className = 'heart';
+      heart.style.left = Math.random() * window.innerWidth + 'px';
+      heart.style.top = Math.random() * window.innerHeight + 'px';
+      document.body.appendChild(heart);
+    }
+  </script>
+
+</body>
+</html>
