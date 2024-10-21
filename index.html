@@ -20,11 +20,18 @@
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
       border-radius: 10px;
       overflow: hidden;
+      
     }
 
     .chapter {
       padding: 20px;
       text-align: center;
+      opacity: 0;
+      transition: opacity 0.7s ease-in-out;
+    }
+
+    .chapter.active {
+      opacity: 1;
     }
 
     h2 {
@@ -85,6 +92,7 @@
       animation: float 5s infinite ease-in-out;
       opacity: 0.7;
     }
+    
 
     @keyframes float {
       0% { transform: translateY(0); opacity: 1; }
@@ -138,42 +146,42 @@
     <div class="chapter" id="chapter1">
       <h2>The Beginning of Us</h2>
       <img src="img/chapter1.png" alt="How We Met">
-      <p>Who knew that a simple hello would lead us here? The day our worlds collided is a day I will never forget.</p>
+      <p>Who knew that a simple story reply would lead us here? The day our worlds collided is a day I will never forget.</p>
     </div>
 
-    <div class="chapter" id="chapter2">
+    <!-- <div class="chapter" id="chapter2">
       <h2>Our First Adventure</h2>
       <img src="your_image_here2.jpg" alt="First Date">
       <p>I still remember the butterflies from our first date. A day to remember forever.</p>
-    </div>
+    </div> -->
 
     <div class="chapter" id="chapter3">
       <h2>Our First Journey</h2>
-      <img src="your_image_here3.jpg" alt="First Trip">
+      <img src="img/drive1.png" alt="First Trip">
       <p>Exploring new places and creating memories to last a lifetime. With you, every place feels like home.</p>
     </div>
 
     <div class="chapter" id="chapter4">
       <h2>Laughter and Love</h2>
-      <img src="your_image_here4.jpg" alt="Silly Moments">
+      <img src="img/boy-girl-pasta2.png" alt="Silly Moments">
       <p>The best part of us is how much we laugh together. You make every moment brighter.</p>
     </div>
 
     <div class="chapter" id="chapter5">
       <h2>Milestones and Memories</h2>
-      <img src="your_image_here5.jpg" alt="Special Days">
+      <img src="img/boy-girl-flower-main.png" alt="Special Days">
       <p>Every milestone and special day spent with you feels like a celebration of love.</p>
     </div>
 
     <div class="chapter" id="chapter6">
       <h2>The Magic in the Everyday</h2>
-      <img src="your_image_here6.jpg" alt="Little Moments">
+      <img src="img/boy-girl-talking.png" alt="Little Moments">
       <p>It's the little things that make me fall for you every single day.</p>
     </div>
 
     <div class="chapter" id="chapter7">
       <h2>Our Next Chapter</h2>
-      <img src="your_image_here7.jpg" alt="The Future">
+      <img src="img/getting_married.png" alt="The Future">
       <p>I can't wait to see where life takes us next. Together, we can conquer anything.</p>
     </div>
 
@@ -181,6 +189,7 @@
       <button id="prev" disabled>Previous</button>
       <button id="next">Next</button>
     </div>
+    
   </div>
 
   <script>
@@ -195,10 +204,21 @@
       nextBtn.disabled = currentChapter === chapters.length - 1;
     }
 
+    document.addEventListener("DOMContentLoaded", () => {
+      const firstChapter = document.getElementById('chapter1');
+      firstChapter.style.display = 'block'; // Ensure it's displayed
+      firstChapter.style.opacity = 1; // Fade it in
+    });
+
     function showChapter(index) {
       chapters.forEach((chapter, i) => {
         chapter.style.display = i === index ? 'block' : 'none';
+
+        chapter.classList.remove('active'); 
       });
+      setTimeout(() => {
+        chapters[index].classList.add('active');  // Add active class to the current chapter with fade effect
+      }, 100);
       updateNavigation();
     }
 
